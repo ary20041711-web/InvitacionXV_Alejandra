@@ -138,42 +138,42 @@
         </div>
 
         <br>
-        <h3>¿Me acompañas?</h3>
-        <p>Por favor, confirma tu asistencia antes del 20 de Junio seleccionando una opción.</p>
-        
-        <div class="botones-asistencia-directa">
-            <form action="https://formspree.io/f/mkoekkka" method="POST">
-                <input type="hidden" name="Asistencia" value="Confirmada (Dijo que SÍ)">
-                <button type="submit" class="btn-directo btn-si">Sí, asistiré</button>
-            </form>
-
-            <form action="https://formspree.io/f/mkoekkka" method="POST">
-                <input type="hidden" name="Asistencia" value="Incierta (Dijo que TAL VEZ)">
-                <button type="submit" class="btn-directo btn-talvez">Tal vez</button>
-            </form>
-        </div>
-    </section>
-
-    <section class="seccion-canciones">
-        <img src="af0d8623c96ee1bef446664b6f7945c1.png" alt="Decoración Música">
-        <h3>¿A qué canción te recuerdo?</h3>
-        <p>Recomiéndame una canción que quieras o que te recuerde a mí.</p>
-        
-        <div id="contenedor-burbujas-musica"></div>
-
-        <form class="formulario-cancion" id="form-playlist" action="https://formspree.io/f/xnjrllzp" method="POST">
-            <div class="grupo-input">
-                <input type="text" name="nombre_invitado" placeholder="Tu Nombre" required>
-            </div>
-            <div class="grupo-input">
-                <input type="text" name="cancion_sugerida" id="input-cancion" placeholder="Nombre de la Canción y Artista" required>
-            </div>
-            <button type="submit" class="btn-enviar-cancion">Sugerir Canción</button>
+       <h3>¿Me acompañas?</h3>
+    <p>Por favor, confirma tu asistencia antes del 20 de Junio seleccionando una opción.</p>
+    
+    <div class="botones-asistencia-directa">
+        <form action="https://formspree.io/f/mkoekkka" method="POST" id="form-asistencia-si">
+            <input type="hidden" name="Asistencia" value="Confirmada (Dijo que SÍ)">
+            <button type="submit" class="btn-directo btn-si">Sí, asistiré</button>
         </form>
 
-        <img src="b00ec140290712ac383c6f6e717d8408.png" alt="Lirio Decorativo Música" class="lirio-global lirio-musica-der">
-    </section>
+        <form action="https://formspree.io/f/mkoekkka" method="POST" id="form-asistencia-talvez">
+            <input type="hidden" name="Asistencia" value="Incierta (Dijo que TAL VEZ)">
+            <button type="submit" class="btn-directo btn-talvez">Tal vez</button>
+        </form>
+    </div>
+</section>
 
-    <script src="script.js"></script>
+<section class="seccion-canciones">
+    <img src="af0d8623c96ee1bef446664b6f7945c1.png" alt="Decoración Música">
+    <h3>¿A qué canción te recuerdo?</h3>
+    <p>Recomiéndame una canción que quieras o que te recuerde a mí.</p>
+    
+    <div id="contenedor-burbujas-musica"></div>
+
+    <form class="formulario-cancion" id="form-playlist" action="https://formspree.io/f/xnjrllzp" method="POST">
+        <div class="grupo-input">
+            <input type="text" name="nombre_invitado" placeholder="Tu Nombre" required>
+        </div>
+        <div class="grupo-input">
+            <input type="text" name="cancion_sugerida" id="input-cancion" placeholder="Nombre de la Canción y Artista" required>
+        </div>
+        <button type="submit" class="btn-enviar-cancion">Sugerir Canción</button>
+    </form>
+
+    <img src="b00ec140290712ac383c6f6e717d8408.png" alt="Lirio Decorativo Música" class="lirio-global lirio-musica-der">
+</section>
+
+<script src="script.js"></script>
 </body>
 </html>
