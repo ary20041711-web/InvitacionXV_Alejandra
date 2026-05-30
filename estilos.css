@@ -1,0 +1,1181 @@
+/* --- RESET BÁSICO --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cinzel Decorative', sans-serif;
+    background-color: #120d11; /* Fondo estrictamente Negro Puro */
+    color: #FDFBF7;            /* Blanco seda para textos de lectura masiva */
+    text-align: center;
+    overflow-x: hidden;
+}
+.capa-encaje {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10; /* Lo mantiene al frente de los fondos oscuros */
+    pointer-events: none; /* Permite que los destellos y clics pasen a través de él sin estorbar */
+}
+
+.capa-encaje img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.5)); 
+
+    /* --- EFECTO CORTINA DIFUMINADA --- */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 100%, rgba(0,0,0,0) 15%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 10%, rgba(0,0,0,0) 100%);
+}
+
+/* --- 1. PORTADA (HERO) CON CORRECCIÓN DE ALTURA Y FLUJO --- */
+.hero {
+    min-height: 100vh; 
+    height: auto;
+    background-color: #120d11; 
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-start; 
+    align-items: center;
+    
+    /* CAMBIA EL PRIMER NÚMERO (180px es el espacio que se genera desde el borde superior hacia abajo) */
+    padding: 180px 20px 60px 20px; 
+    
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    width: 200%;
+    max-width: 600px; /* O el ancho máximo que tengas para tu contenido */
+    text-align: center;
+    z-index: 5;
+}
+
+/* Espaciado para la frase */
+.frase {
+    margin-bottom: 70px; /* Empuja la tarjeta hacia abajo para que respire el diseño */
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px; /* Centra y alinea el contenido de la portada */
+    gap: 20px;
+}
+
+/* Controla el tamaño y animación de tu propio brillito */
+.sparkle-top .brillito-portada {
+    width: 120px; 
+    height: auto;
+    animation: pulsoMistico 3.5s infinite ease-in-out;
+    display: inline-block;
+}
+
+@keyframes pulsoMistico {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(0.8) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1) rotate(90deg);
+        text-shadow: 0 0 15px #ffb3c6;
+    }
+}
+
+.subtitulo-xv {
+    font-family: 'MedievalSharp';
+    font-size: 1.1rem;
+    letter-spacing: 6px;
+    color: #cf99c3; /* Letras Rosas */
+    margin-bottom: 15px;
+}
+
+/* --- EFECTO DE NOMBRE EN RELIEVE 3D --- */
+.nombre-relieve {
+    margin-top: 120px; /* Esto te da un extra de separación si el padding general no fuera suficiente */
+    margin-bottom: 15px;
+    font-family: 'MedievalSharp', cursive; 
+    font-size: 5rem;                      
+    font-weight: 700;
+    letter-spacing: 5px;                  
+    display: block;
+    margin-bottom: 20px;
+    text-transform: uppercase;            
+    
+    /* MÁGICA CROMADA: Capas de reflejo plateado y rosa metálico */
+    background: linear-gradient(135deg, 
+        #e4b5cb 0%,    /* Inicia en rosa platinado completo */
+        #e4b5cb 25%,   /* Se mantiene rosa por más espacio */
+        #ffffff 32%,   /* <--- Destello de luz blanca súper fino */
+        #e4b5cb 40%,   /* Regresa de inmediato al rosa */
+        #2c2c2e 50%,   /* Línea delgada de sombra metálica central para el 3D */
+        #ffffff 55%,   /* <--- Segundo reflejo espejo blanco y fino */
+        #e4b5cb 62%,   /* Regresa al rosa platinado dominante */
+        #e4b5cb 90%,   /* Sigue siendo rosa casi hasta el final */
+        #ffffff 95%,   /* Mini destello plata en la punta */
+        #e4b5cb 100%   /* Cierra en rosa */
+    );
+    
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+
+    filter: drop-shadow(0px 2px 1px rgba(255, 255, 255, 0.4)) 
+            drop-shadow(3px 5px 15px rgba(0, 0, 0, 0.95));
+            
+    transition: filter 0.4s ease;
+}
+
+.nombre-relieve:hover {
+    filter: drop-shadow(0px 0px 25px rgba(255, 179, 198, 0.6)) 
+            drop-shadow(3px 5px 15px rgba(0, 0, 0, 0.95));
+}
+
+.fecha-principal {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.5rem;
+    letter-spacing: 8px;
+    margin-bottom: 35px;
+    color: #af73a2;
+}
+
+.frase {
+    font-size: 0.9rem;
+    font-style: italic;
+    max-width: 520px;
+    margin: 0 auto 30px auto;
+    line-height: 2;
+    color: #cccccc;
+}
+
+/* --- 2. SECCIÓN MOSAICO (CÍRCULOS Y LIRIO METÁLICO) --- */
+.seccion-mosaico {
+    background-color: #120d11; 
+    padding: 60px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: -240px;
+}
+
+.contenedor-circulos {
+    position: relative;
+    width: 380px;
+    height: 440px;
+}
+
+.circulo-foto {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 310px;
+    height: 310px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #733165; /* Borde Rosa */
+    box-shadow: 6px 14px 20px rgba(111, 82, 111, 0.85);
+    z-index: 2;
+}
+
+.circulo-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.texto-centro-xv {
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 2.2rem;
+    color: #120d11;
+    letter-spacing: 2px;
+    z-index: 4;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
+}
+
+.circulo-rosa {
+    position: absolute;
+    bottom: -30px;
+    left: 75%;
+    transform: translateX(-50%);
+    width: 165px;
+    height: 165px;
+    background: radial-gradient(circle, #733165 0%, #cf99c3 100%); 
+    border-radius: 50%;
+    border: 3px solid #733165;
+    box-shadow: 6px 14px 20px rgba(111, 82, 111, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.texto-cancion {
+    font-family: 'Cinzel Decorative', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #ffffff;
+    letter-spacing: 1px;
+    margin-top: 50px;
+}
+
+.lirios-decorativos {
+    position: absolute;
+    left: 0px;
+    top: 42%;
+    width: 140px;
+    height: auto;
+    z-index: 3;
+    filter: drop-shadow(6px 14px 20px rgba(111, 82, 111, 0.85)) brightness(1.05) contrast(1.1);
+    transform: rotate(-10deg);
+    animation: balanceoLirio 8s infinite ease-in-out;
+}
+
+
+@keyframes balanceoLirio {
+    0%, 100% { transform: rotate(-10deg) scale(1); }
+    50% { transform: rotate(-5deg) scale(1.03); }
+}
+
+.lirio-izq { left: -35px; top: 12%; width: 140px; transform: rotate(-10deg); }
+.lirio-der { right: -35px; left: auto; top: 15%; width: 130px; transform: rotate(25deg); animation-delay: -2s; }
+
+/* --- 3. TARJETAS DE DETALLES Y RECEPCIÓN UNIFICADAS --- */
+.detalles {
+    padding: 60px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 35px;
+    background-color: #120d11;
+}
+
+/* metálico Añadida .tarjeta-evento aquí para que mantenga su estilo aunque esté en la portada */
+.tarjeta-evento, .tarjeta-vestimenta, .tarjeta-buzon {
+    background: #060507;
+    padding: 45px 40px;
+    border: 1.5px solid #733165;
+    max-width: 395px;
+    width: 100%;
+    box-shadow: 6px 14px 20px rgba(111, 82, 111, 0.85);
+    margin: 10px auto; /* Centrado preventivo */
+    border-radius: 9px;
+}
+
+.icono-tarjeta {
+    color: #cf99c3; 
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+.tarjeta-evento h3, .tarjeta-vestimenta h3, .tarjeta-buzon h3 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: #cf99c3; 
+    border-radius: 20px;
+}
+
+.lugar-evento, .estilo-ropa {
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.horario-evento {
+    font-size: 0.95rem;
+    color: #cf99c3;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.direccion {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: #a1a1aa;
+}
+
+.pool-notice {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #733165;
+    border: 1px solid #af73a2;
+    padding: 12px;
+    margin: 15px 0;
+    text-align: left;
+    border-radius: 32px;
+
+}
+
+.pool-notice .material-symbols-outlined {
+    color: #ffffff;
+    font-size: 1.8rem;
+}
+
+.pool-notice p {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: #ffffff;
+   
+
+}
+
+.btn-mapa {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 30px;
+    color: #cf99c3;
+    text-decoration: none;
+    border: 1px solid #cf99c3;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+    border-radius: 20px;
+}
+
+.btn-mapa:hover {
+    background-color: #cf99c3;
+    color: #120d11;
+    border-radius: 8px;
+}
+
+/* --- 4. CUENTA REGRESIVA Y CONFIRMACIÓN --- */
+.confirmacion {
+    background-color: #120d11;
+    padding: 60px 20px;
+        border-radius: 20px;
+
+}
+
+.confirmacion h3 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.8rem;
+    color: #ffb3c6;
+    margin-bottom: 20px;
+        border-radius: 20px;
+
+}
+
+.confirmacion p {
+    max-width: 480px;
+    margin: 0 auto 40px auto;
+    color: #a1a1aa;
+    line-height: 1.9;
+    font-size: 0.95rem;
+        border-radius: 20px;
+
+}
+
+.cuenta-regresiva {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: 25px auto 35px auto;
+    max-width: 450px;
+}
+
+.bloque-tiempo {
+    background: rgba(115, 49, 101, 0.2); 
+    border: 1px solid rgba(207, 153, 195, 0.4); 
+    padding: 12px 18px;
+    border-radius: 8px;
+    min-width: 65px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.bloque-tiempo span {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffb3c6; 
+    display: block;
+    line-height: 1.2;
+}
+
+.bloque-tiempo p {
+    font-family: 'MedievalSharp', sans-serif;
+    font-size: 0.75rem;
+    color: #FDFBF7; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 5px;
+}
+
+.botones-asistencia-directa {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 20px;
+
+}
+
+.botones-asistencia-directa form {
+    flex: 1;
+        border-radius: 20px;
+
+}
+
+.btn-directo {
+    width: 100%;
+    padding: 16px;
+    background-color: #120d11;
+    font-family: 'Cinzel Decorative', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+        border-radius: 20px;
+
+}
+
+.btn-si { border: 1px solid #ffb3c6; color: #ffb3c6;    border-radius: 20px; }
+.btn-si:hover { background-color: #ffb3c6; color: #120d11; box-shadow: 0 0 15px rgba(255, 179, 198, 0.4); }
+.btn-talvez { border: 1px solid #ffffff; color: #ffffff;    border-radius: 20px; }
+.btn-talvez:hover { background-color: #ffffff; color: #120d11; box-shadow: 0 0 15px rgba(255, 255, 255, 0.3); }
+
+/* --- 5. SECCIÓN SUGERENCIA DE CANCIONES --- */
+.seccion-canciones {
+    background-color: #120d11;
+    padding: 80px 20px;
+        border-radius: 20px;
+border-radius: 20px;
+
+}
+
+.seccion-canciones img {
+    width: 280px;      
+    height: auto;
+    display: block;
+    margin: 0 auto 20px auto; 
+        border-radius: 20px;
+
+}
+
+.seccion-canciones h3 {
+    font-family: 'Cinzel Decorative', serif;
+    color: #ffb3c6;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+        border-radius: 20px;
+
+}
+
+.seccion-canciones p {
+    font-size: 0.9rem;
+    max-width: 500px;
+    margin: 0 auto 35px auto;
+    color: #a1a1aa;
+    line-height: 1.8;
+        border-radius: 20px;
+
+}
+
+.formulario-cancion {
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+        border-radius: 20px;
+
+}
+
+.grupo-input input {
+    width: 100%;
+    padding: 14px;
+    background-color: #120d11;
+    border: 1px solid #22222a;
+    color: #ffffff;
+    font-family: 'Cinzel Decorative', sans-serif;
+    font-size: 0.9rem;
+    border-radius: 20px;
+}
+
+.grupo-input input:focus { outline: none; border-color: #ffb3c6;     border-radius: 20px; }
+
+.btn-enviar-cancion {
+    background-color: transparent;
+    color: #ffb3c6;
+    border: 1px solid #ffb3c6;
+    padding: 14px;
+    font-family: 'Cinzel Decorative', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 20px;
+}
+
+.btn-enviar-cancion:hover { background-color: #ffb3c6; color: #120d11; }
+
+#contenedor-burbujas-musica {
+    position: relative;
+    width: 100%;
+    height: 250px; 
+    margin-bottom: 20px;
+    overflow: hidden;
+    background: #120d11; 
+    border-radius: 4px;
+}
+
+.burbuja-cancion {
+    position: absolute;
+    bottom: -60px; 
+    background: linear-gradient(135deg, rgba(255, 179, 198, 0.15), #120d11);
+    border: 1px solid rgba(255, 179, 198, 0.4);
+    color: #ffb3c6; 
+    padding: 10px 18px;
+    border-radius: 30px; 
+    font-size: 0.85rem;
+    font-family: 'Cinzel Decorative', sans-serif;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px); 
+    animation: flotarBurbuja 6s linear infinite;
+}
+
+@keyframes flotarBurbuja {
+    0% { transform: translateY(0) scale(0.8); opacity: 0; }
+    15% { opacity: 0.7; }
+    85% { opacity: 0.4; }
+    100% { transform: translateY(-300px) scale(1.05); opacity: 0; }
+}
+
+/* --- LIRIOS DECORATIVOS GLOBALES --- */
+.lirio-global {
+    position: absolute;
+    width: 120px;               
+    height: auto;
+    opacity: 0.35;              
+    z-index: 1;                 
+    pointer-events: none;       
+    filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.7)) brightness(1.1);
+    animation: balanceoGlobal 10s infinite ease-in-out;
+}
+.lirio-portada-der { right: 5%; bottom: 8%; width: 130px; transform: rotate(15deg); animation-delay: -1s; }
+.lirio-detalles-izq { left: 2%; top: 5%; width: 150px; transform: rotate(-25deg); animation-delay: -3s; }
+.lirio-musica-der { right: 3%; top: 40%; width: 110px; transform: rotate(45deg); animation-delay: -5s; }
+
+/* --- MARCOS Y DESTELLOS LATERALES --- */
+.capa-destellos-bordes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none; 
+    z-index: 1;           
+}
+
+.destello-borde {
+    position: absolute;
+    width: 75px;          
+    height: auto;
+    opacity: 0.55;        
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.15));
+    animation: titilarDestello 4s infinite ease-in-out;
+}
+
+@keyframes titilarDestello {
+    0%, 100% { transform: scale(0.9) rotate(0deg); opacity: 0.4; }
+    50% { transform: scale(1.05) rotate(6deg); opacity: 0.8; }
+}
+
+body::before, body::after {
+    content: "";
+    position: fixed; 
+    top: 0;
+    width: 2px; 
+    height: 100vh; 
+    background: linear-gradient(to bottom, transparent, #ffccd5, #b8b8b8, #ffccd5, transparent);
+    z-index: 2; 
+    opacity: 0.6; 
+    pointer-events: none;
+}
+
+body::before { left: 40px; }
+body::after { right: 40px; }
+
+/* --- RESPONSIVE / OPTIMIZACIÓN CELULARES --- */
+@media (max-width: 500px) {
+    body::before { left: 12px; }
+    body::after { right: 12px; }
+
+    .nombre-relieve {
+        font-size: 3.2rem; 
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+    }
+
+    .subtitulo-xv { font-size: 0.9rem; letter-spacing: 4px; }
+    .fecha-principal { font-size: 1.2rem; letter-spacing: 4px; }
+    
+    .cuenta-regresiva { gap: 12px; margin: 20px auto; }
+    .bloque-tiempo { padding: 8px 10px; min-width: 60px; }
+    .bloque-tiempo span { font-size: 1.4rem; }
+    .bloque-tiempo p { font-size: 0.65rem; }
+
+    .contenedor-circulos {
+        width: 100%;       
+        max-width: 320px;  
+        height: 460px;     
+        margin: 0 auto;
+    }
+
+    .circulo-foto { width: 240px; height: 240px; }
+    .circulo-rosa { width: 165px; height: 165px; left: 70%; } /* Ajuste de solape en móviles */
+    .texto-centro-xv { font-size: 1.8rem; bottom: 15px; }
+    .texto-cancion { margin-top: 50px; font-size: 0.85rem; }
+
+    .lirio-izq { width: 90px; left: -15px; top: 40%; }
+    .lirio-der { width: 85px; right: -15px; top: 10%; }
+    .lirio-peque { width: 70px; bottom: -10px; }
+
+    .detalles { padding: 20px 10px; gap: 15px; }
+    .tarjeta-evento, .tarjeta-vestimenta, .tarjeta-buzon {
+        padding: 20px 15px; 
+        max-width: 90%;     
+        margin: 0 auto;
+        border-radius: 8px; 
+    }
+
+    .botones-asistencia-directa {
+        flex-direction: column; 
+        gap: 10px;
+        width: 85%;            
+        margin: 0 auto;
+    }
+
+    .btn-directo {
+        padding: 12px 15px !important; 
+        font-size: 0.8rem !important;  
+        letter-spacing: 1px;
+        width: 100%;               
+    }
+}
+
+.btn-si {
+    border: 1px solid #ffb3c6;
+    color: #ffb3c6;
+    border-radius: 20px;
+}
+
+.btn-si:hover {
+    background-color: #ffb3c6;
+    color: #120d11;
+    box-shadow: 0 0 15px rgba(255, 179, 198, 0.4);
+    border-radius: 20px;
+}
+
+.btn-talvez {
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    border-radius: 20px;
+}
+
+.btn-talvez:hover {
+    background-color: #ffffff;
+    color: #120d11;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+}
+
+/* --- CONTENEDOR Y DISEÑO DE BURBUJAS DE MÚSICA --- */
+#contenedor-burbujas-musica {
+    position: relative;
+    width: 100%;
+    height: 250px; /* Altura ideal para que las burbujas luzcan su recorrido */
+    margin-bottom: 20px;
+    overflow: hidden;
+    background: #120d11; 
+    border-radius: 4px;
+}
+
+.burbuja-cancion {
+    position: absolute;
+    bottom: -60px; /* Inician resguardadas abajo del contenedor */
+    background: linear-gradient(135deg, rgba(255, 179, 198, 0.15), #120d11);
+    border: 1px solid rgba(255, 179, 198, 0.4);
+    color: #ffb3c6; 
+    padding: 10px 18px;
+    border-radius: 30px; 
+    font-size: 0.85rem;
+    font-family: 'Cinzel Decorative', sans-serif;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px); 
+    animation: flotarBurbuja 6s linear infinite;
+}
+
+/* Animación fluida de las burbujas musicales */
+@keyframes flotarBurbuja {
+    0% {
+        transform: translateY(0) scale(0.8);
+        opacity: 0;
+    }
+    15% {
+        opacity: 0.7;
+    }
+    85% {
+        opacity: 0.4;
+    }
+    100% {
+        transform: translateY(-300px) scale(1.05);
+        opacity: 0;
+    }
+}
+
+/* --- LIRIOS DECORATIVOS GLOBALES --- */
+.lirio-global {
+    position: absolute;
+    width: 120px;               
+    height: auto;
+    opacity: 0.35;              
+    z-index: 1;                 
+    pointer-events: none;       
+    filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.7)) brightness(1.1);
+    animation: balanceoGlobal 10s infinite ease-in-out;
+}
+@keyframes balanceoGlobal {
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+    50% { transform: translateY(-10px) rotate(8deg) scale(1.05); }
+}
+
+/* Contenedores con posicionamiento relativo para heredar lirios absolutos */
+.hero, .detalles, .seccion-canciones {
+    position: relative;
+}
+
+.lirio-portada-der {
+    right: 5%;
+    bottom: 8%;
+    width: 130px;
+    transform: rotate(15deg);
+    animation-delay: -1s;
+}
+  
+.lirio-detalles-izq {
+    left: 2%;
+    top: 5%;
+    width: 150px;
+    transform: rotate(-25deg);
+    animation-delay: -3s;
+}
+
+.lirio-musica-der {
+    right: 3%;
+    top: 40%;
+    width: 110px;
+    transform: rotate(45deg);
+    animation-delay: -5s;
+}
+
+/* --- CAPA GLOBAL DE DESTELLOS CROMADOS TRANSPARENTES --- */
+.capa-destellos-bordes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none; 
+    z-index: 1;           
+}
+
+.destello-borde {
+    position: absolute;
+    width: 75px;          
+    height: auto;
+    opacity: 0.55;        
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.15));
+    animation: titilarDestello 4s infinite ease-in-out;
+}
+
+@keyframes titilarDestello {
+    0%, 100% {
+        transform: scale(0.9) rotate(0deg);
+        opacity: 0.4;
+    }
+    50% {
+        transform: scale(1.05) rotate(6deg);
+        opacity: 0.8;
+    }
+}
+
+/* Distribución perimetral de destellos */
+.izq-1 { top: 8%;   left: -15px; transform: rotate(-10deg); animation-delay: 0s; }
+.izq-2 { top: 32%;  left: -25px; width: 90px; transform: rotate(15deg); animation-delay: -1.5s; }
+.izq-3 { top: 58%;  left: -10px; width: 65px; animation-delay: -3s; }
+.izq-4 { top: 82%;  left: -20px; width: 80px; transform: rotate(-5deg); animation-delay: -0.8s; }
+
+.der-1 { top: 18%;  right: -20px; width: 85px; transform: rotate(20deg); animation-delay: -2s; }
+.der-2 { top: 45%;  right: -15px; transform: rotate(-15deg); animation-delay: -0.5s; }
+.der-3 { top: 70%;  right: -25px; width: 95px; transform: rotate(45deg); animation-delay: -3.5s; }
+.der-4 { top: 92%;  right: -10px; width: 70px; animation-delay: -1.2s; }
+
+/* --- LÍNEAS RECTAS DE MARCO LATERAL --- */
+body::before,
+body::after {
+    content: "";
+    position: fixed; 
+    top: 0;
+    width: 2px; 
+    height: 100vh; 
+    background: linear-gradient(to bottom, transparent, #ffccd5, #b8b8b8, #ffccd5, transparent);
+    z-index: 2; 
+    opacity: 0.6; 
+    pointer-events: none;
+}
+
+body::before { left: 40px; }
+body::after { right: 40px; }
+
+/* --- DISEÑO BASE DE CUENTA REGRESIVA --- */
+.cuenta-regresiva {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: 25px auto 35px auto;
+    max-width: 450px;
+}
+
+.bloque-tiempo {
+    background: rgba(115, 49, 101, 0.2); 
+    border: 1px solid rgba(207, 153, 195, 0.4); 
+    padding: 12px 18px;
+    border-radius: 8px;
+    min-width: 75px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.bloque-tiempo span {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffb3c6; 
+    display: block;
+    line-height: 1.2;
+}
+
+.bloque-tiempo p {
+    font-family: 'MedievalSharp', sans-serif;
+    font-size: 0.75rem;
+    color: #FDFBF7; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 5px;
+}
+
+/* ==========================================================================
+   OPTIMIZACIÓN ESTRICTA PARA DISPOSITIVOS MÓVILES (Media Queries)
+   ========================================================================== */
+@media (max-width: 500px) {
+    
+    /* 1. Ajuste del marco lineal */
+    body::before { left: 12px; }
+    body::after { right: 12px; }
+
+    /* 2. Escala de Tipografías Principales */
+    .nombre-relieve {
+        font-size: 3.2rem; 
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+    }
+
+    .subtitulo-xv {
+        font-size: 0.9rem;
+        letter-spacing: 4px;
+    }
+
+    .fecha-principal {
+        font-size: 1.2rem;
+        letter-spacing: 4px;
+    }
+
+    /* Ajuste de Cuenta Regresiva */
+    .cuenta-regresiva {
+        gap: 12px; 
+        margin: 20px auto;
+    }
+
+    .bloque-tiempo {
+        padding: 8px 10px; 
+        min-width: 60px;
+    }
+
+    .bloque-tiempo span {
+        font-size: 1.4rem; 
+    }
+
+    .bloque-tiempo p {
+        font-size: 0.65rem;
+    }
+
+    /* 3. Ajuste de Mosaico de Círculos (Corrección de Solapamiento) */
+    .contenedor-circulos {
+        width: 100%;       
+        max-width: 320px;  
+        height: 460px;     
+        margin: 0 auto;
+    }
+
+    .circulo-foto {
+        width: 240px;      
+        height: 240px;
+    }
+
+    .circulo-rosa {
+        width: 165px;      /* Corregido de 250px a 165px para evitar desborde */
+        height: 165px;
+        left: 70%;         /* Centrado sutil en la esquina inferior del solape */
+    }
+
+    .texto-centro-xv {
+        font-size: 1.8rem;
+        bottom: 15px;
+    }
+
+    .texto-cancion {
+        margin-top: 50px;  /* Reducido para evitar saltos de línea huérfanos */
+        font-size: 0.85rem;
+    }
+
+    /* Ajuste de Lirios en Mosaico */
+    .lirio-izq { width: 90px; left: -15px; top: 40%; }
+    .lirio-der { width: 85px; right: -15px; top: 10%; }
+    .lirio-peque { width: 70px; bottom: -10px; }
+
+    /* 4. Tarjetas Informativas Compactas */
+    .detalles {
+        padding: 20px 10px; 
+        gap: 15px;          
+    }
+
+    .tarjeta-evento, .tarjeta-vestimenta, .tarjeta-buzon {
+        padding: 20px 15px; 
+        max-width: 90%;     
+        margin: 0 auto;
+        border-radius: 8px; 
+    }
+
+    .tarjeta-evento h3, .tarjeta-vestimenta h3, .tarjeta-buzon h3 {
+        font-size: 1.1rem !important; 
+        margin-bottom: 8px !important;
+        letter-spacing: 2px !important;
+    }
+
+    .tarjeta-evento p, .tarjeta-vestimenta p, .tarjeta-buzon p {
+        font-size: 0.85rem !important;
+        line-height: 1.4 !important;
+        margin-bottom: 10px !important;
+    }
+
+    .tarjeta-evento img, .tarjeta-vestimenta img, .tarjeta-buzon img {
+        width: 35px !important; 
+        height: auto;
+        margin-bottom: 8px;
+    }
+
+    /* 5. Botones y Formularios Adaptables */
+    .btn-cancion, .btn-sugerir {
+        padding: 10px 20px !important; 
+        font-size: 0.85rem !important;  
+        max-width: 200px;              
+        margin: 0 auto;
+    }
+
+    .botones-asistencia-directa {
+        flex-direction: column; 
+        gap: 10px;
+        width: 85%;            
+        margin: 0 auto;
+    }
+
+    .btn-directo {
+        padding: 12px 15px !important; 
+        font-size: 0.8rem !important;  
+        letter-spacing: 1px;
+        width: 100%;               
+        box-shadow: none;              
+    }
+}
+/* --- COORDENADAS DE DISPERSIÓN (UNA POR UNA) --- */
+
+/* Hero / Portada */
+/* Forzamos a que ninguna estrella pueda estirar la pantalla hacia los lados */
+/* ==========================================================================
+   SISTEMA DE FONDO: LLUVIA DE ESTRELLAS CROMADAS (25 ELEMENTOS)
+   ========================================================================== */
+
+/* Contenedor general transparente */
+/* Contenedor máster por encima de toda la web */
+.contenedor-estrellas-masivas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    
+    /* EFECTO ENCAPADO (NUEVO) */
+    z-index: 99;           /* Al frente de tarjetas, textos y fotos */
+    pointer-events: none;  /* Deja pasar los clics a los botones de abajo */
+}
+
+/* Regla base de cada estrella */
+.est-masiva {
+    position: absolute;
+    height: auto;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3)) contrast(130%);
+    
+    /* EFECTOS SOLICITADOS (NUEVO) */
+    z-index: 99;           /* Refuerza que se queden arriba */
+    opacity: 0.45;         /* Efecto transparentoso ideal para no tapar letras */
+    pointer-events: none;  /* Seguridad extra para los clics */
+}
+
+/* --- TU ENJAMBRE ORIGINAL (CALIBRADO) --- */
+.e1  { top: 3%; left: 5%;  width: 210px; transform: scale(1.4); }
+.e2  { top: 12%; right: 8%;  width: 195px; transform: scale(2.0); }
+.e3  { top: 15%; left: 5%;  width: 260px; transform: scale(1.0);}
+.e4  { top: 14%; left: 10%;  width: 145px; transform: scale(0.8);}
+.e5  { top: 8%; right: 45%;  width: 185px; transform: scale(0.7);}
+
+.e6  { top: 24%; left: 78%;  width: 170px; transform: scale(2.5); }
+.e7  { top: 28%; left: 10%;  width: 100px; transform: scale(2.4);}
+.e8  { top: 33%; right: 16%; width: 180px; transform: scale(2.0); }
+.e9  { top: 35%; left: 20%;  width: 55px; transform: scale(4.4); }
+.e10 { top: 43%; right: 25%; width: 65px; transform: scale(4.4); }
+.e11 { top: 49%; left: 10%;  width: 190px; transform: scale(1.6); }
+.e12 { top: 53%; right: 12%; width: 175px; transform: scale(1.4); }
+.e13 { top: 58%; left: 5%;  width: 185px; transform: scale(2.2); }
+.e14 { top: 62%; left: 30%;  width: 150px; transform: scale(0.4); }
+.e15 { top: 69%; right: 4%;  width: 105px; transform: scale(4.0);}
+
+.e16 { top: 71%; left: 5%;   width: 165px; transform: scale(1.0);}
+.e17 { top: 75%; right: 58%; width: 180px; transform: scale(1.2); }
+.e18 { top: 81%; left: 1%;  width: 270px; transform: scale(0.8);}
+.e19 { top: 89.5%; right: 8%;  width: 195px; transform: scale(1.2); }
+.e20 { top: 46.8%; left: 58%;  width: 260px; transform: scale(1.0); }
+
+.e21 { top: 94%; right: 75%; width: 185px; transform: scale(1.4); }
+.e22 { top: 40%; left: 10%;  width: 100px; transform: scale(3.0);}
+.e23 { top: 38%; right: 50%; width: 145px; transform: scale(0.6); } /* Ajustado de 2px a 45px para que se note */
+.e24 { top: 58%; left: 40%;  width: 155px; transform: scale(0.4); }
+.e25 { top: 38%; right: 1%;  width: 190px; transform: scale(1.0); }
+
+/* --- ¡MÁS ESTRELLAS EXTRAS! (NUEVO) --- */
+/* Rellenando huecos en las transiciones de las secciones */
+.e26 { top: 8%;  left: 3%;   width: 125px; transform: scale(0.6);}
+.e27 { top: 22%; right: 45%; width: 175px; transform: scale(0.4); }
+.e28 { top: 30%; right: 3%;  width: 160px; transform: scale(0.4);}
+.e29 { top: 6%; left: 49%;  width: 190px; transform: scale(0.8); }
+.e30 { top: 44%; left: 2%;   width: 115px; transform: scale(1.4);}
+
+.e31 { top: 65%; left: 45%;  width: 180px; transform: scale(1.0); }
+.e32 { top: 60%; right: 18%; width: 140px; transform: scale(1.5);}
+.e33 { top: 84%; right: 42%; width: 170px; transform: scale(1.0); }
+.e34 { top: 73%; left: 38%;  width: 110px; transform: scale(2.0);}
+.e35 { top: 77%; right: 2%;  width: 150px; transform: scale(2.0);}
+
+.e36 { top: 79%; left: 1%;  width: 195px; transform: scale(0.4); }
+.e37 { top: 88%; right: 80%; width: 125px; transform: scale(1.5);}
+.e38 { top: 91%; left: 23%;   width: 140px; transform: scale(1.0);}
+.e39 { top: 96%; right: 17%; width: 185px; transform: scale(1.6); }
+.e40 { top: 97%; left: 32%;  width: 105px; }
+
+
+/* --- SEGURO ANTI-DESBORDE LATERAL --- */
+body {
+    overflow-x: hidden;
+    position: relative;
+    background-color: #120d11;
+}
+/* ==========================================================================
+   AJUSTES ESPECIALES PARA CELULARES (MÁXIMO 480PX DE ANCHO)
+   ========================================================================== */
+/* ==========================================================================
+   ADUSTES DE TORMENTA DE ESTRELLAS PARA CELULARES (MÁXIMO 480PX)
+   ========================================================================== */
+@media screen and (max-width: 480px) {
+    
+    /* Suavizamos un poco la opacidad en celulares para mejorar la lectura */
+    .est-masiva {
+        opacity: 0.45; 
+    }
+
+    /* --- RE-CALIBRACIÓN DE TAMAÑOS Y POSICIONES LATERALES --- */
+    
+    /* Bloque 1 al 10 (Portada y Foto) */
+    .e1  { left: 2%;   width: 90px;  }
+    .e2  { right: 3%;  width: 100px; }
+    .e3  { left: 15%;  width: 85px;  }
+    .e4  { left: 5%;   width: 70px;  }
+    .e5  { right: 2%;  width: 95px;  }
+    .e6  { right: 4%;  width: 50px;  }
+    .e7  { left: 1%;   width: 65px;  }
+    .e8  { right: 8%;  width: 55px;  }
+    .e9  { left: 10%;  width: 45px;  }
+    .e10 { right: 5%;  width: 50px;  }
+
+    /* Bloque 11 al 20 (Tarjetas de Vestimenta, Buzón y Contador) */
+    .e11 { left: 4%;   width: 65px;  }
+    .e12 { right: 4%;  width: 60px;  }
+    .e13 { right: 12%; width: 55px;  }
+    .e14 { left: 8%;   width: 45px;  }
+    .e15 { right: 1%;  width: 70px;  }
+    .e16 { left: 2%;   width: 80px;  }
+    .e17 { right: 10%; width: 65px;  }
+    .e18 { left: 15%;  width: 95px;  }
+    .e19 { right: 3%;  width: 70px;  }
+    .e20 { left: 6%;   width: 90px;  }
+
+    /* Bloque 21 al 30 (Ajustes intermedios y música) */
+    .e21 { right: 15%; width: 65px;  }
+    .e22 { left: 5%;   width: 70px;  }
+    .e23 { right: 6%;  width: 40px;  }
+    .e24 { left: 12%;  width: 50px;  }
+    .e25 { right: 2%;  width: 65px;  }
+    .e26 { left: 1%;   width: 75px;  }
+    .e27 { right: 20%; width: 55px;  }
+    .e28 { right: 4%;  width: 85px;  }
+    .e29 { left: 25%;  width: 60px;  }
+    .e30 { left: 3%;   width: 70px;  }
+
+    /* Bloque 31 al 40 (Cierre de la invitación y Playlist) */
+    .e31 { left: 15%;  width: 55px;  }
+    .e32 { right: 10%; width: 80px;  }
+    .e33 { right: 25%; width: 50px;  }
+    .e34 { left: 8%;   width: 75px;  }
+    .e35 { right: 3%;  width: 90px;  }
+    .e36 { right: 12%; width: 65px;  }
+    .e37 { left: 20%;  width: 75px;  }
+    .e38 { left: 2%;   width: 85px;  }
+    .e39 { right: 5%;  width: 60px;  }
+    .e40 { left: 10%;  width: 70px;  }
+}
