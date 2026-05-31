@@ -138,21 +138,28 @@
         </div>
 
         <br>
-       <h3>¿Me acompañas?</h3>
-    <p>Por favor, confirma tu asistencia antes del 20 de Junio seleccionando una opción.</p>
-    
-    <div class="botones-asistencia-directa">
-        <form action="https://formspree.io/f/mkoekkka" method="POST" id="form-asistencia-si">
-            <input type="hidden" name="Asistencia" value="Confirmada (Dijo que SÍ)">
-            <button type="submit" class="btn-directo btn-si">Sí, asistiré</button>
-        </form>
+        <h3>¿Me acompañas?</h3>
+        <p>Por favor, confirma tu asistencia antes del 20 de Junio escribiendo tu nombre y seleccionando una opción.</p>
+        
+        <!-- Unificado en un solo formulario para capturar todo junto -->
+        <form action="https://formspree.io/f/mkoekkka" method="POST" id="form-asistencia">
+            
+            <!-- Nueva casilla para el nombre de quien confirma -->
+            <div class="grupo-input" style="margin-bottom: 20px; text-align: center;">
+                <input type="text" name="Nombre de quien confirma" placeholder="Tu nombre" required 
+                       style="width: 80%; max-width: 300px; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; box-sizing: border-box;">
+            </div>
 
-        <form action="https://formspree.io/f/mkoekkka" method="POST" id="form-asistencia-talvez">
-            <input type="hidden" name="Asistencia" value="Incierta (Dijo que TAL VEZ)">
-            <button type="submit" class="btn-directo btn-talvez">Tal vez</button>
+            <!-- Campo oculto para guardar la respuesta del botón que presionen -->
+            <input type="hidden" name="Asistencia" id="valor-asistencia" value="">
+            
+            <div class="botones-asistencia-directa">
+                <!-- Cambiados a type="button" para controlar el envío con JavaScript -->
+                <button type="button" class="btn-directo btn-si" onclick="enviarAsistencia('Confirmada (Dijo que SÍ)')">Sí, asistiré</button>
+                <button type="button" class="btn-directo btn-talvez" onclick="enviarAsistencia('Incierta (Dijo que TAL VEZ)')">Tal vez</button>
+            </div>
         </form>
-    </div>
-</section>
+    </section>
 
 <section class="seccion-canciones">
     <img src="af0d8623c96ee1bef446664b6f7945c1.png" alt="Decoración Música">

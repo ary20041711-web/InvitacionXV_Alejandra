@@ -18,7 +18,7 @@ const x = setInterval(function() {
     // Renderizar los números con formato '00' si son menores a 10
     document.getElementById("dias").innerHTML = dias < 10 ? "0" + dias : dias;
     document.getElementById("horas").innerHTML = horas < 10 ? "0" + horas : horas;
-    document.getElementById("minutos").innerHTML = minutos < 10 ? "0" + minutos : minutos; // <-- CORREGIDO
+    document.getElementById("minutos").innerHTML = minutos < 10 ? "0" + minutos : minutos; 
     document.getElementById("segundos").innerHTML = segundos < 10 ? "0" + segundos : segundos;
     
     // Texto alternativo cuando el contador llegue a cero
@@ -42,7 +42,7 @@ const cancionesSugeridas = [
 
 const contenedor = document.getElementById("contenedor-burbujas-musica");
 
-// Función unificada para crear burbujas flotantes (sirve para el inicio y para nuevas sugerencias)
+// Función unificada para crear burbujas flotantes
 function crearBurbuja(textoCancion, esNueva = false) {
     if (!contenedor) return;
 
@@ -55,12 +55,10 @@ function crearBurbuja(textoCancion, esNueva = false) {
     burbuja.style.left = `${posicionX}%`;
 
     if (esNueva) {
-        // Si el invitado la acaba de sugerir, aparece de inmediato y se borra en 6 segundos
         burbuja.style.animationDelay = "0s";
         contenedor.appendChild(burbuja);
         setTimeout(() => { burbuja.remove(); }, 6000);
     } else {
-        // Las canciones iniciales llevan retraso aleatorio para la animación CSS continua
         const retraso = Math.random() * 5; 
         burbuja.style.animationDelay = `${retraso}s`;
         contenedor.appendChild(burbuja);
@@ -87,7 +85,6 @@ function enviarFormularioSilencioso(idFormulario, mensajeExito, esPlaylist = fal
     formulario.addEventListener("submit", function(event) {
         event.preventDefault(); // Detiene el salto de página
 
-        // Si es el formulario de música, atrapamos el texto antes de limpiar para hacer la burbuja viva
         let tituloCancion = "";
         if (esPlaylist) {
             const inputCancion = document.getElementById('input-cancion');
@@ -108,7 +105,6 @@ function enviarFormularioSilencioso(idFormulario, mensajeExito, esPlaylist = fal
             if (response.ok) {
                 alert(mensajeExito); 
                 
-                // Si todo sale bien y es una canción, lanzamos su burbuja en tiempo real
                 if (esPlaylist && tituloCancion) {
                     crearBurbuja(tituloCancion, true);
                 }
@@ -119,7 +115,6 @@ function enviarFormularioSilencioso(idFormulario, mensajeExito, esPlaylist = fal
             }
         })
         .catch(error => {
-            // Fallback por si falla la conexión en el envío de música
             if (esPlaylist && tituloCancion) {
                 crearBurbuja(tituloCancion, true);
                 formulario.reset();
@@ -130,7 +125,53 @@ function enviarFormularioSilencioso(idFormulario, mensajeExito, esPlaylist = fal
     });
 }
 
-// Activamos el truco para tus 3 formularios de manera limpia
-enviarFormularioSilencioso("form-asistencia-si", "¡Genial! Tu asistencia ha sido confirmada.");
-enviarFormularioSilencioso("form-asistencia-talvez", "¡Entendido! Anotamos que tal vez vienes.");
+// Activamos el truco para el formulario de la playlist de manera limpia
 enviarFormularioSilencioso("form-playlist", "Gracias por tu sugerencia. <3", true);
+
+
+/* ==========================================
+   4. NUEVA LÓGICA PARA ASISTENCIA UNIFICADA
+   ========================================== */
+function enviarAsistencia(respuesta) {
+    const formulario = document.getElementById('form-asistencia');
+    
+    if (!formulario) return;
+
+    // Validar si el usuario escribió su nombre en la casilla obligatoria (required)
+    if (!formulario.checkValidity()) {
+        formulario.reportValidity();
+        return;
+    }
+
+    // Guardar la respuesta ("Confirmada..." o "Incierta...") en el input oculto
+    document.getElementById('valor-asistencia').value = respuesta;
+
+    // Definir la alerta personalizada según el botón presionado
+    let mensajeAlerta = "¡Genial! Tu asistencia ha sido confirmada.";
+    if (respuesta.includes("TAL VEZ")) {
+        mensajeAlerta = "¡Entendido! Anotamos que tal vez vienes.";
+    }
+
+    // Recopilar los datos del formulario (Nombre + Respuesta de asistencia)
+    const datos = new FormData(formulario);
+
+    // Envío silencioso vía FETCH a Formspree
+    fetch(formulario.action, {
+        method: formulario.method,
+        body: datos,
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            alert(mensajeAlerta); // Dispara la alerta bonita que querías
+            formulario.reset();   // Limpia la casilla del nombre para el siguiente uso
+        } else {
+            alert("Hubo un problemita al enviar tu asistencia. Intenta de nuevo.");
+        }
+    })
+    .catch(error => {
+        alert("Error de conexión. Revisa tu internet e intenta de nuevo.");
+    });
+}
