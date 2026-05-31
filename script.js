@@ -37,7 +37,10 @@ const cancionesSugeridas = [
     "Cruel Summer - Taylor Swift",
     "Blinding Lights - The Weeknd",
     "Dynamite - BTS",
-    "Night Changes - One Direction"
+    "Night Changes - One Direction",
+    "Beggin'- Måneskin",
+    "How You Like That - BLACKPINK",
+    "No se que pasa conmigo- los tres caballeros"
 ];
 
 const contenedor = document.getElementById("contenedor-burbujas-musica");
