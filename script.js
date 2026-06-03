@@ -39,8 +39,12 @@ const cancionesSugeridas = [
     "Dynamite - BTS",
     "Night Changes - One Direction",
     "Beggin'- Måneskin",
-    "How You Like That - BLACKPINK",
-    "No se que pasa conmigo- los tres caballeros"
+    "How You Like That - BLACKPINK x2",
+    "No se que pasa conmigo - Los tres caballeros",
+   "Alma dinamita - wos",
+   "Smells like teen spirit - Nirvana x2",
+   "Favorite crime - Olivia Rodrigo",
+   "Yoko- Álvaro Díaz"
 ];
 
 const contenedor = document.getElementById("contenedor-burbujas-musica");
